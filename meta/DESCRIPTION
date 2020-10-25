@@ -1,0 +1,6 @@
+
+App description:
+
+- This application launches a container with a MongoDB server.
+It also supplies a set of utilities for working with it.
+- Application version is equivalent to MongoDB server version.

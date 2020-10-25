@@ -1,0 +1,36 @@
+#!/bin/bash
+set -e
+
+#Prepare system:
+# Copy config
+if [ ! -e /etc/mongod.conf ]; then
+    echo "Copying mongod.conf to /etc/mongod.conf ..."
+    RESULT_CONFIG_PATH="/etc/mongod.conf"
+else
+    # the config can be edited manually
+    echo "Copying mongod.conf to /etc/mongod.conf.${DAM_PROJECT_VERSION} ..."
+    RESULT_CONFIG_PATH="/etc/mongod.conf.${DAM_PROJECT_VERSION}"
+fi
+cp -f ./mongod.conf $RESULT_CONFIG_PATH
+
+# create backups dir
+echo "Creating /var/lib/mongodb/backups" ...
+mkdir -p /var/lib/mongodb/backups
+
+# copy utils to system
+cd utils/
+for name in * ; do
+    echo "Copying $name to /usr/sbin/$name ..."
+    cp -f $name /usr/sbin/$name
+    chmod +x /usr/sbin/$name
+done;
+cd ../
+
+#Start container:
+echo "Starting container..."
+docker run	-d \
+		-v /var/lib/mongodb:/var/lib/mongodb \
+		-v /var/log/mongodb:/var/log/mongodb \
+		-v /etc/mongod.conf:/etc/mongod.conf \
+		-p 27017:27017 \
+		${DAM_PROJECT_NAME}:${DAM_PROJECT_VERSION}
