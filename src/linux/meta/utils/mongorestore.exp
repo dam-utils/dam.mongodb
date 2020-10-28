@@ -1,9 +1,0 @@
-#!/bin/bash
-
-docker run	-i \
-		-t \
-		-v /var/lib/mongodb/dumps:/var/lib/mongodb/dumps \
-		--rm=true \
-		--net=host \
-		--entrypoint=/usr/bin/mongorestore \
-	${DAM_PRODUCT_NAME}:${DAM_PRODUCT_VERSION} "$@"

@@ -8,8 +8,8 @@ if [ ! -e /etc/mongod.conf ]; then
     RESULT_CONFIG_PATH="/etc/mongod.conf"
 else
     # the config can be edited manually
-    echo "Copying mongod.conf to /etc/mongod.conf.${DAM_PROJECT_VERSION} ..."
-    RESULT_CONFIG_PATH="/etc/mongod.conf.${DAM_PROJECT_VERSION}"
+    echo "Copying mongod.conf to /etc/mongod.conf.${DAM_APP_VERSION} ..."
+    RESULT_CONFIG_PATH="/etc/mongod.conf.${DAM_APP_VERSION}"
 fi
 cp -f ./mongod.conf $RESULT_CONFIG_PATH
 
@@ -33,4 +33,4 @@ docker run	-d \
 		-v /var/log/mongodb:/var/log/mongodb \
 		-v /etc/mongod.conf:/etc/mongod.conf \
 		-p 27017:27017 \
-		${DAM_PROJECT_NAME}:${DAM_PROJECT_VERSION}
+		${DAM_APP_NAME}:${DAM_APP_VERSION}
