@@ -1,0 +1,7 @@
+#!/bin/bash
+cd utils/
+for name in * ; do
+    echo "Removing /usr/sbin/$name from the system ..."
+    rm -f /usr/sbin/$name
+done;
+cd ../

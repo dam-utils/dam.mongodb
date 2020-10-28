@@ -1,0 +1,9 @@
+#!/bin/bash
+
+docker run	-i \
+		-t \
+		-v /var/lib/mongodb/dumps:/var/lib/mongodb/dumps \
+		--rm=true \
+		--net=host \
+		--entrypoint=/usr/bin/mongoexport \
+	${DAM_APP_NAME}:${DAM_APP_VERSION} "$@"

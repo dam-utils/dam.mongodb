@@ -1,8 +1,8 @@
 FROM debian:9.13
 
 # DAM preparing
-ENV DAM_PROJECT_VERSION=3.6.20
-ENV DAM_PROJECT_NAME=mongodb
+ENV DAM_APP_VERSION=3.6.20
+ENV DAM_APP_NAME=mongodb
 COPY meta /meta
 
 # Install
@@ -10,11 +10,11 @@ COPY meta /meta
 RUN echo "deb http://repo.mongodb.org/apt/debian stretch/mongodb-org/3.6 main" | \
 	tee /etc/apt/sources.list.d/mongodb-org-3.6.list
 RUN apt-get update && \
-	apt-get install -y --force-yes 	mongodb-org=$DAM_PROJECT_VERSION \
-					mongodb-org-server=$DAM_PROJECT_VERSION \
-               				mongodb-org-shell=$DAM_PROJECT_VERSION \
-					mongodb-org-mongos=$DAM_PROJECT_VERSION \
-					mongodb-org-tools=$DAM_PROJECT_VERSION && \
+	apt-get install -y --force-yes 	mongodb-org=$DAM_APP_VERSION \
+					mongodb-org-server=$DAM_APP_VERSION \
+               				mongodb-org-shell=$DAM_APP_VERSION \
+					mongodb-org-mongos=$DAM_APP_VERSION \
+					mongodb-org-tools=$DAM_APP_VERSION && \
 	apt-get clean && \
 	apt-get autoclean && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
