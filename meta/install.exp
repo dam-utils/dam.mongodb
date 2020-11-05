@@ -11,18 +11,19 @@ else
     echo "Copying mongod.conf to /etc/mongod.conf.${DAM_APP_VERSION} ..."
     RESULT_CONFIG_PATH="/etc/mongod.conf.${DAM_APP_VERSION}"
 fi
-cp -f ./mongod.conf $RESULT_CONFIG_PATH
+sudo cp -f ./mongod.conf $RESULT_CONFIG_PATH
 
 # create backups dir
 echo "Creating /var/lib/mongodb/backups" ...
-mkdir -p /var/lib/mongodb/backups
+sudo mkdir -p /var/lib/mongodb/backups
 
 # copy utils to system
+sudo rm -rf utils/*.exp
 cd utils/
 for name in * ; do
     echo "Copying $name to /usr/sbin/$name ..."
-    cp -f $name /usr/sbin/$name
-    chmod +x /usr/sbin/$name
+    sudo cp -f $name /usr/sbin/$name
+    sudo chmod +x /usr/sbin/$name
 done;
 cd ../
 
@@ -33,4 +34,6 @@ docker run	-d \
 		-v /var/log/mongodb:/var/log/mongodb \
 		-v /etc/mongod.conf:/etc/mongod.conf \
 		-p 27017:27017 \
+		--restart=always \
+		--name=mongod \
 		${DAM_APP_NAME}:${DAM_APP_VERSION}

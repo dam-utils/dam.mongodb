@@ -1,6 +1,9 @@
 .PHONY: all build
 
-all: build
+all: clean build
 
 build:
-	dam create ../dam.mongodb --name=mongodb
+	dam -x create ../dam.mongodb --name=mongodb
+
+clean:
+	rm -rf meta/utils/mongo meta/utils/mongodump meta/utils/mongoexport meta/utils/mongofiles meta/utils/mongooplog meta/utils/mongoperf meta/utils/mongorestore meta/utils/mongostat meta/utils/mongotop meta/install

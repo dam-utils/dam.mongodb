@@ -1,7 +1,15 @@
 #!/bin/bash
+set -e
+
+sudo rm -rf utils/*.exp
 cd utils/
 for name in * ; do
     echo "Removing /usr/sbin/$name from the system ..."
-    rm -f /usr/sbin/$name
+    sudo rm -f /usr/sbin/$name
 done;
 cd ../
+
+CONTAINER=mongod
+
+echo "Removing container '$CONTAINER' ..."
+docker rm -f $CONTAINER || true

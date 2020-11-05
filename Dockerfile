@@ -29,3 +29,4 @@ WORKDIR /var/lib/mongodb/backups
 ENTRYPOINT ["/usr/bin/mongod"]
 CMD ["--dbpath","/var/lib/mongodb","--config","/etc/mongod.conf"]
 
+EXPOSE 27017
