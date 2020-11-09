@@ -33,7 +33,7 @@ docker run	-d \
 		-v /var/lib/mongodb:/var/lib/mongodb \
 		-v /var/log/mongodb:/var/log/mongodb \
 		-v /etc/mongod.conf:/etc/mongod.conf \
-		-p 27017:27017 \
 		--restart=always \
 		--name=mongod \
+		--net=host \
 		${DAM_APP_NAME}:${DAM_APP_VERSION}
