@@ -36,4 +36,4 @@ docker run	-d \
 		--restart=always \
 		--name=mongod \
 		--net=host \
-		${DAM_APP_NAME}:${DAM_APP_VERSION}
+		${DAM_APP_TAG}
